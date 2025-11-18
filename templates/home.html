@@ -1,11 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academy project assignment-1</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Academy — Home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+    {% include 'navbar.html' %}
     
+
+  <main class="container">
+    <h1>Welcome to the Academy</h1>
+    <p>Use the navigation above to go to Home, Courses, Trainers, and Students</p>
+  </main>
 </body>
 </html>

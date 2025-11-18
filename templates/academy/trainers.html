@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trainers — Academy</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+  <div class="container">
+    <div class="heading" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+      <h1>Trainers</h1>
+      <p>Total: {{ trainers.count }}</p>
+    </div>
+
+    <table class="table" aria-label="Trainers table">
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Expertise</th>
+          <th>Students</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for trainer in trainers %}
+          <tr>
+            <td>
+              {% if trainer.trainer_photo %}
+                <img src="{{ trainer.trainer_photo.url }}" alt="{{ trainer.full_name }}" class="thumb">
+              {% else %}
+                <div style="width:80px;height:80px;background:#f3f4f6;border-radius:6px;display:inline-block"></div>
+              {% endif %}
+            </td>
+            <td>{{ trainer.first_name }} {{ trainer.last_name }}</td>
+            <td><a href="mailto:{{ trainer.email }}">{{ trainer.email }}</a></td>
+            <td>{{ trainer.expertise }}</td>
+            <td>{{ trainer.students.count }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="5">No trainers found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

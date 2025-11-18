@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Courses — Academy</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    {% include 'navbar.html' %}
+  <div class="container">
+    <div class="heading">
+      <h1>Courses</h1>
+      <p>Total: {{ courses.count }}</p>
+    </div>
+
+    <table class="table" aria-label="Courses table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Course Name</th>
+          <th>Description</th>
+          <th>Duration (weeks)</th>
+          <th>Students Enrolled</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in courses %}
+          <tr>
+            <td>
+              {% if course.course_image %}
+                <img src="{{ course.course_image.url }}" alt="{{ course.course_name }}" class="thumb">
+              {% else %}
+                <!-- empty placeholder -->
+                <div style="width:100px;height:60px;background:#f3f4f6;border-radius:4px;display:inline-block"></div>
+              {% endif %}
+            </td>
+            <td>{{ course.course_name }}</td>
+            <td>{{ course.description|truncatechars:120 }}</td>
+            <td>{{ course.duration_weeks }}</td>
+            <td>{{ course.enrolled_students.count }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="5">No courses found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

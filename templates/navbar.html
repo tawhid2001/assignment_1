@@ -1,0 +1,26 @@
+{% load static %}
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="brand">Academy</div>
+
+  <div class="nav-links">
+    <a href="{% url 'home' %}" title="Home"
+       {% if request.resolver_match and request.resolver_match.url_name == 'home' %}class="active"{% endif %}>
+      Home
+    </a>
+
+    <a href="{% url 'academy:courses' %}" title="Courses"
+       {% if request.resolver_match and request.resolver_match.namespace == 'academy' and request.resolver_match.url_name == 'courses' %}class="active"{% endif %}>
+      Courses
+    </a>
+
+    <a href="{% url 'academy:trainers' %}" title="Trainers"
+       {% if request.resolver_match and request.resolver_match.namespace == 'academy' and request.resolver_match.url_name == 'trainers' %}class="active"{% endif %}>
+      Trainers
+    </a>
+
+    <a href="{% url 'academy:students' %}" title="Students"
+       {% if request.resolver_match and request.resolver_match.namespace == 'academy' and request.resolver_match.url_name == 'students' %}class="active"{% endif %}>
+      Students
+    </a>
+  </div>
+</nav>
