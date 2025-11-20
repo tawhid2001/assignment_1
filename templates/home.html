@@ -14,6 +14,32 @@
   <main class="container">
     <h1>Welcome to the Academy</h1>
     <p>Use the navigation above to go to Home, Courses, Trainers, and Students</p>
+        <section style="margin-top:1.5rem;">
+      <h2>Summary</h2>
+
+      <table class="table" style="max-width:600px;">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Total Courses</td>
+            <td>{{ total_courses }}</td>
+          </tr>
+          <tr>
+            <td>Total Trainers</td>
+            <td>{{ total_trainers }}</td>
+          </tr>
+          <tr>
+            <td>Total Students</td>
+            <td>{{ total_students }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   </main>
 </body>
 </html>
