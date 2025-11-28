@@ -15,6 +15,9 @@
   <div class="container">
     <div class="heading">
       <h1>Courses</h1>
+      <div>
+        <a href="{% url 'academy:course_add' %}" class="btn btn-primary">Add New Course</a>
+      </div>
       <p>Total: {{ courses.count }}</p>
     </div>
 
