@@ -1,45 +1,52 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Academy — Home</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
     {% include 'navbar.html' %}
-    
 
-  <main class="container">
-    <h1>Welcome to the Academy</h1>
-    <p>Use the navigation above to go to Home, Courses, Trainers, and Students</p>
-        <section style="margin-top:1.5rem;">
-      <h2>Summary</h2>
+    <main class="container">
+      <h1>Welcome to the Academy</h1>
+      <p>
+        Use the navigation above to go to Home, Courses, Trainers, and Students
+      </p>
+      <section style="margin-top: 1.5rem">
+        <h2>Summary</h2>
 
-      <table class="table" style="max-width:600px;">
-        <thead>
-          <tr>
-            <th>Metric</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Total Courses</td>
-            <td>{{ total_courses }}</td>
-          </tr>
-          <tr>
-            <td>Total Trainers</td>
-            <td>{{ total_trainers }}</td>
-          </tr>
-          <tr>
-            <td>Total Students</td>
-            <td>{{ total_students }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </main>
-</body>
+        <table class="table" style="max-width: 600px">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Total Courses</td>
+              <td>{{ total_courses }}</td>
+            </tr>
+            <tr>
+              <td>Total Trainers</td>
+              <td>{{ total_trainers }}</td>
+            </tr>
+            <tr>
+              <td>Total Students</td>
+              <td>{{ total_students }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
 </html>

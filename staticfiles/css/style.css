@@ -1,0 +1,137 @@
+/* Navbar layout & theme */
+:root {
+  --nav-bg: #1f2937; /* dark slate */
+  --nav-text: #ffffff;
+  --nav-accent: #3b82f6; /* blue accent */
+  --nav-hover: rgba(255,255,255,0.08);
+  --container-padding: 1.25rem;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #111827;
+  background: #f8fafc;
+}
+
+/* Top navbar */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--container-padding);
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  gap: 1rem;
+}
+
+/* Brand */
+.nav .brand {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--nav-text);
+  text-decoration: none;
+}
+
+/* Links container */
+.nav .nav-links {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Individual link style */
+.nav .nav-links a {
+  color: var(--nav-text);
+  text-decoration: none;
+  padding: 0.45rem 0.7rem;
+  border-radius: 6px;
+  transition: background 150ms ease, color 150ms ease, transform 120ms ease;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Hover and focus */
+.nav .nav-links a:hover,
+.nav .nav-links a:focus {
+  background: var(--nav-hover);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+/* Active link (apply class="active" on the link you want highlighted) */
+.nav .nav-links a.active {
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.06) inset;
+  color: var(--nav-text);
+}
+
+/* Container for page content */
+.container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Responsive: stack links under brand on narrow screens */
+@media (max-width: 720px) {
+  .nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav .brand {
+    margin-bottom: 0.5rem;
+  }
+
+  .nav .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav .nav-links a {
+    display: block;
+    padding: 0.7rem 0.75rem;
+  }
+}
+
+/* Minimal table fallback styling if your CSS file isn't present */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .table th, .table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid #e6e9ef;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    .table th {
+      background: #f3f4f6;
+      font-weight: 700;
+    }
+    .thumb {
+      max-width: 100px;
+      max-height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    .actions {
+      white-space: nowrap;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .heading {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      margin-bottom:1rem;
+    }

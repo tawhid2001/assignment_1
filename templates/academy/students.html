@@ -1,60 +1,84 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Students — Academy</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Students — Academy</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
     {% include 'navbar.html' %}
-  <div class="container">
-    <div class="heading" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-      <h1>Students</h1>
-      <p>Total: {{ students.count }}</p>
-    </div>
+    <div class="container">
+      <div
+        class="heading"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+        "
+      >
+        <h1>Students</h1>
+        <p>Total: {{ students.count }}</p>
+      </div>
 
-    <table class="table" aria-label="Students table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Active</th>
-          <th>Trainer</th>
-          <th>Enrolled Courses</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for student in students %}
+      <table class="table" aria-label="Students table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Active</th>
+            <th>Trainer</th>
+            <th>Enrolled Courses</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
           <tr>
             <td>{{ student.first_name }} {{ student.last_name }}</td>
-            <td><a href="mailto:{{ student.email }}">{{ student.email }}</a></td>
+            <td>
+              <a href="mailto:{{ student.email }}">{{ student.email }}</a>
+            </td>
             <td>{% if student.is_active %}Yes{% else %}No{% endif %}</td>
             <td>
-              {% if student.trainer %}
-                {{ student.trainer.first_name }} {{ student.trainer.last_name }}
-              {% else %}
-                —
-              {% endif %}
+              {% if student.trainer %} {{ student.trainer.first_name }} {{
+              student.trainer.last_name }} {% else %} — {% endif %}
             </td>
             <td>
-              {% if student.enrolled_courses.exists %}
-                {% for course in student.enrolled_courses.all %}
-                  {{ course.course_name }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-              {% else %}
-                None
-              {% endif %}
+              {% if student.enrolled_courses.exists %} 
+              {% for course in student.enrolled_courses.all %} 
+              {{ course.course_name }}
+              {% if not forloop.last %}, 
+              {% endif %} 
+              {% endfor %} 
+              {% else %} None 
+              {% endif%}
+            </td>
+            <td>
+              <a href="" style="color: black"><i class="fa fa-eye"></i></a>
+              <a href="" style="color: black"><i class="fa fa-edit"></i></a>
+              <a href="" style="color: black"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
-        {% empty %}
+          {% empty %}
           <tr>
             <td colspan="5">No students found.</td>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</body>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
 </html>
