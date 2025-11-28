@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Delete Course — Academy</title>
+  <title>Delete Trainer — Academy</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -16,13 +16,13 @@
 <body>
   {% include 'navbar.html' %}
   <main class="container" style="margin-top:2rem;max-width:700px;">
-    <h1>Delete Course</h1>
-    <p>Are you sure you want to delete "<strong>{{ course.course_name }}</strong>"?</p>
+    <h1>Delete Trainer</h1>
+    <p>Are you sure you want to delete "<strong>{{ trainer.full_name }}</strong>"?</p>
 
-    <form action="{% url 'academy:course_delete' course.id %}" method="post">
+    <form action="{% url 'academy:trainer_delete' trainer.id %}" method="post">
       {% csrf_token %}
       <button type="submit" class="btn btn-danger">Yes, delete</button>
-      <a href="{% url 'academy:course_detail' course.id %}" class="btn btn-secondary">Cancel</a>
+      <a href="{% url 'academy:trainer_detail' trainer.id %}" class="btn btn-secondary">Cancel</a>
     </form>
   </main>
 </body>

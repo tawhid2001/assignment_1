@@ -86,12 +86,43 @@ def trainer_add(request):
     }
     return render(request, 'academy/trainer_add.html', context)
 
+
 def trainer_detail(request, id):
     trainer = get_object_or_404(Trainer, id=id)
     context = {
         'trainer': trainer
     }
     return render(request, 'academy/trainer_detail.html', context)
+
+
+def trainer_edit(request, id):
+    trainer= get_object_or_404(Trainer, id=id)
+    if request.method == 'POST':
+        form = TrainerForm(request.POST, request.FILES, instance=trainer)
+        if form.is_valid():
+            form.save()
+            return redirect('academy:trainer_detail', id=trainer.id)
+    else:
+        form = TrainerForm(instance=trainer)
+    context = {
+        'form': form,
+        'trainer': trainer,
+        'is_edit': True
+    }
+    return render(request, 'academy/trainer_edit.html', context)
+
+
+def trainer_delete(request, id):
+    trainer = get_object_or_404(Trainer, id=id)
+    if request.method == 'POST':
+        if trainer.trainer_photo and trainer.trainer_photo.url != '/media/default.png':
+            trainer.trainer_photo.delete()
+        trainer.delete()
+        return redirect('academy:trainers')
+    context = {
+        'trainer': trainer
+    }
+    return render(request, 'academy/trainer_delete.html', context)
 
 def students(request):
     students = Student.objects.all()
