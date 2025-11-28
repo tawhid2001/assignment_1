@@ -30,6 +30,10 @@
         "
       >
         <h1>Students</h1>
+        <div>
+          <a href="{% url 'academy:student_add' %}" class="btn btn-primary"
+            >Add New Student</a>
+        </div>
         <p>Total: {{ students.count }}</p>
       </div>
 
@@ -53,8 +57,7 @@
             </td>
             <td>{% if student.is_active %}Yes{% else %}No{% endif %}</td>
             <td>
-              {% if student.trainer %} {{ student.trainer.first_name }} {{
-              student.trainer.last_name }} {% else %} — {% endif %}
+              {% if student.trainer %} {{ student.trainer.full_name }} {% else %} — {% endif %}
             </td>
             <td>
               {% if student.enrolled_courses.exists %} 
@@ -67,7 +70,7 @@
               {% endif%}
             </td>
             <td>
-              <a href="" style="color: black"><i class="fa fa-eye"></i></a>
+              <a href="{% url 'academy:student_detail' student.id %}" style="color: black"><i class="fa fa-eye"></i></a>
               <a href="" style="color: black"><i class="fa fa-edit"></i></a>
               <a href="" style="color: black"><i class="fa fa-trash"></i></a>
             </td>

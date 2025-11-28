@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Academy — Home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+
+    <main class="container">
+        <h1>{{ student.full_name }}</h1>
+        <img src="{{student.student_photo.url}}" alt="{{ student.full_name }}" class="thumb">
+        <p>{{ student.email }}</p>
+        <p><strong>Active:</strong> {% if student.is_active %}Yes{% else %}No{% endif %}</p>
+        <p><strong>Trainer:</strong> {% if student.trainer %} {{ student.trainer.full_name }} {% else %} — {% endif %}</p>
+        <p><strong>Enrolled Courses:</strong> 
+            {% for course in student.enrolled_courses.all %}
+                {{ course.course_name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                None
+            {% endfor %}
+        </p>
+    </main>
+  </body>
+</html>
