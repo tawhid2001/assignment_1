@@ -30,10 +30,9 @@
         "
       >
         <h1>Students</h1>
-        <div>
-          <a href="{% url 'academy:student_add' %}" class="btn btn-primary"
-            >Add New Student</a>
-        </div>
+       {% if perms.academy.add_student %}
+       <a href="{% url 'academy:student_add' %}" class="btn btn-primary">Add Student</a>
+       {% endif %}
         <p>Total: {{ students.count }}</p>
       </div>
 
@@ -45,7 +44,9 @@
             <th>Active</th>
             <th>Trainer</th>
             <th>Enrolled Courses</th>
+            {% if user.is_authenticated %}
             <th>Actions</th>
+            {% endif %}
           </tr>
         </thead>
         <tbody>
@@ -69,11 +70,17 @@
               {% else %} None 
               {% endif%}
             </td>
+            {% if user.is_authenticated %}
             <td>
               <a href="{% url 'academy:student_detail' student.id %}" style="color: black"><i class="fa fa-eye"></i></a>
+              {% if perms.academy.change_student %}
               <a href="{% url 'academy:student_edit' student.id %}" style="color: black"><i class="fa fa-edit"></i></a>
+              {% endif %}
+              {% if perms.academy.delete_student %}
               <a href="{% url 'academy:student_delete' student.id %}" style="color: black"><i class="fa fa-trash"></i></a>
+              {% endif %}
             </td>
+            {% endif %}
           </tr>
           {% empty %}
           <tr>

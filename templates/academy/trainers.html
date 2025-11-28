@@ -18,9 +18,9 @@
   <div class="container">
     <div class="heading" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
       <h1>Trainers</h1>
-      <div>
-        <a href="{% url 'academy:trainer_add' %}" class="btn btn-primary">Add New Trainer</a>
-      </div>
+      {% if perms.academy.add_trainer %}
+      <a href="{% url 'academy:trainer_add' %}" class="btn btn-primary">Add Trainer</a>
+      {% endif %}
       <p>Total: {{ trainers.count }}</p>
     </div>
 
@@ -51,8 +51,12 @@
             <td>{{ trainer.students.count }}</td>
             <td>
               <a href="{% url 'academy:trainer_detail' trainer.id %}" style="color: black;"><i class="fa fa-eye"></i></a>
+              {% if perms.academy.change_trainer %}
               <a href="{% url 'academy:trainer_edit' trainer.id %}" style="color: black;"><i class="fa fa-edit"></i></a>
+              {% endif %}
+              {% if perms.academy.delete_trainer %}
               <a href="{% url 'academy:trainer_delete' trainer.id %}" style="color: black;"><i class="fa fa-trash"></i></a>
+              {% endif %}
             </td>
           </tr>
         {% empty %}

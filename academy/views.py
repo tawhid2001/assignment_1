@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Course, Trainer, Student
 from .forms import CourseForm, TrainerForm, StudentForm
+from django.contrib.auth.decorators import permission_required, login_required
 
 def courses(request):
     courses = Course.objects.all()
@@ -17,7 +18,8 @@ def course_detail(request, id):
     }
     return render(request, 'academy/course_detail.html', context)
 
-
+@login_required
+@permission_required('academy.change_course', raise_exception=True)
 def course_edit(request, id):
     course= get_object_or_404(Course, id=id)
     if request.method == 'POST':
@@ -34,7 +36,8 @@ def course_edit(request, id):
     }
     return render(request, 'academy/course_edit.html', context)
 
-
+@login_required
+@permission_required('academy.delete_course', raise_exception=True)
 def course_delete(request, id):
     course = get_object_or_404(Course, id=id)
     if request.method == 'POST':
@@ -47,7 +50,8 @@ def course_delete(request, id):
     }
     return render(request, 'academy/course_delete.html', context)
 
-
+@login_required
+@permission_required('academy.add_course', raise_exception=True)
 def course_add(request):
     if request.method == 'POST':
         form = CourseForm(request.POST, request.FILES)
@@ -64,6 +68,8 @@ def course_add(request):
 
 
 # -----------------------------------------------------------------------
+
+@login_required
 def trainers(request):
     trainers= Trainer.objects.all()
     context = {
@@ -71,7 +77,8 @@ def trainers(request):
     }
     return render(request, 'academy/trainers.html', context)
 
-
+@login_required
+@permission_required('academy.add_trainer', raise_exception=True)
 def trainer_add(request):
     if request.method == 'POST':
         form = TrainerForm(request.POST, request.FILES)
@@ -87,6 +94,7 @@ def trainer_add(request):
     return render(request, 'academy/trainer_add.html', context)
 
 
+@login_required
 def trainer_detail(request, id):
     trainer = get_object_or_404(Trainer, id=id)
     context = {
@@ -95,6 +103,8 @@ def trainer_detail(request, id):
     return render(request, 'academy/trainer_detail.html', context)
 
 
+@login_required
+@permission_required('academy.change_trainer', raise_exception=True)
 def trainer_edit(request, id):
     trainer= get_object_or_404(Trainer, id=id)
     if request.method == 'POST':
@@ -112,6 +122,8 @@ def trainer_edit(request, id):
     return render(request, 'academy/trainer_edit.html', context)
 
 
+@login_required
+@permission_required('academy.delete_trainer', raise_exception=True)
 def trainer_delete(request, id):
     trainer = get_object_or_404(Trainer, id=id)
     if request.method == 'POST':
@@ -134,6 +146,8 @@ def students(request):
     return render(request, 'academy/students.html', context)
 
 
+@login_required
+@permission_required('academy.add_student', raise_exception=True)
 def student_add(request):
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES)
@@ -148,6 +162,7 @@ def student_add(request):
     }
     return render(request, 'academy/student_add.html', context)
 
+@login_required
 def student_detail(request, id):
     student = get_object_or_404(Student, id=id)
     context = {
@@ -155,6 +170,8 @@ def student_detail(request, id):
     }
     return render(request, 'academy/student_detail.html', context)
 
+@login_required
+@permission_required('academy.change_student', raise_exception=True)
 def student_edit(request, id):
     student= get_object_or_404(Student, id=id)
     if request.method == 'POST':
@@ -171,6 +188,9 @@ def student_edit(request, id):
     }
     return render(request, 'academy/student_edit.html', context)  
 
+
+@login_required
+@permission_required('academy.delete_student', raise_exception=True)
 def student_delete(request, id):
     student = get_object_or_404(Student, id=id)
     if request.method == 'POST':
