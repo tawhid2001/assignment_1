@@ -49,7 +49,7 @@
             <td>{{ course.enrolled_students.count }}</td>
             <td>
               <a href="{% url 'academy:course_detail' course.id %}" style="color: black"><i class="fa fa-eye"></i></a>
-              <a href="" style="color: black"><i class="fa fa-edit"></i></a>
+              <a href="{% url 'academy:course_edit' course.id %}" style="color: black"><i class="fa fa-edit"></i></a>
               <a href="" style="color: black"><i class="fa fa-trash"></i></a>
             </td>
           </tr>

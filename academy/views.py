@@ -19,8 +19,17 @@ def course_detail(request, id):
 
 def course_edit(request, id):
     course= get_object_or_404(Course, id=id)
+    if request.method == 'POST':
+        form = CourseForm(request.POST, request.FILES, instance=course)
+        if form.is_valid():
+            form.save()
+            return redirect('academy:course_detail', id=course.id)
+    else:
+        form = CourseForm(instance=course)
     context = {
-        'course': course
+        'form': form,
+        'course': course,
+        'is_edit': True
     }
     return render(request, 'academy/course_edit.html', context)
 
