@@ -34,6 +34,19 @@ def course_edit(request, id):
     return render(request, 'academy/course_edit.html', context)
 
 
+def course_delete(request, id):
+    course = get_object_or_404(Course, id=id)
+    if request.method == 'POST':
+        if course.course_image and course.course_image.url != '/media/default.png':
+            course.course_image.delete()
+        course.delete()
+        return redirect('academy:courses')
+    context = {
+        'course': course
+    }
+    return render(request, 'academy/course_delete.html', context)
+
+
 def course_add(request):
     if request.method == 'POST':
         form = CourseForm(request.POST, request.FILES)

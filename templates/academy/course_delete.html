@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Delete Course — Academy</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  {% include 'navbar.html' %}
+  <main class="container" style="margin-top:2rem;max-width:700px;">
+    <h1>Delete Course</h1>
+    <p>Are you sure you want to delete "<strong>{{ course.course_name }}</strong>"?</p>
+
+    <form action="{% url 'academy:course_delete' course.id %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Yes, delete</button>
+      <a href="{% url 'academy:course_detail' course.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </main>
+</body>
+</html>
