@@ -18,6 +18,9 @@
   <div class="container">
     <div class="heading" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
       <h1>Trainers</h1>
+      <div>
+        <a href="{% url 'academy:trainer_add' %}" class="btn btn-primary">Add New Trainer</a>
+      </div>
       <p>Total: {{ trainers.count }}</p>
     </div>
 
@@ -47,7 +50,7 @@
             <td>{{ trainer.expertise }}</td>
             <td>{{ trainer.students.count }}</td>
             <td>
-              <a href="" style="color: black;"><i class="fa fa-eye"></i></a>
+              <a href="{% url 'academy:trainer_detail' trainer.id %}" style="color: black;"><i class="fa fa-eye"></i></a>
               <a href="" style="color: black;"><i class="fa fa-edit"></i></a>
               <a href="" style="color: black;"><i class="fa fa-trash"></i></a>
             </td>

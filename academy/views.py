@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Course, Trainer, Student
-from .forms import CourseForm
+from .forms import CourseForm, TrainerForm
 
 def courses(request):
     courses = Course.objects.all()
@@ -16,6 +16,7 @@ def course_detail(request, id):
         'course': course
     }
     return render(request, 'academy/course_detail.html', context)
+
 
 def course_edit(request, id):
     course= get_object_or_404(Course, id=id)
@@ -61,12 +62,36 @@ def course_add(request):
     }
     return render(request, 'academy/course_add.html', context)
 
+
+# -----------------------------------------------------------------------
 def trainers(request):
     trainers= Trainer.objects.all()
     context = {
         'trainers': trainers
     }
     return render(request, 'academy/trainers.html', context)
+
+
+def trainer_add(request):
+    if request.method == 'POST':
+        form = TrainerForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('academy:trainers')
+    else:
+        form = TrainerForm()
+        
+    context = {
+        'form': form
+    }
+    return render(request, 'academy/trainer_add.html', context)
+
+def trainer_detail(request, id):
+    trainer = get_object_or_404(Trainer, id=id)
+    context = {
+        'trainer': trainer
+    }
+    return render(request, 'academy/trainer_detail.html', context)
 
 def students(request):
     students = Student.objects.all()
