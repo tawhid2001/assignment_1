@@ -154,3 +154,31 @@ def student_detail(request, id):
         'student': student
     }
     return render(request, 'academy/student_detail.html', context)
+
+def student_edit(request, id):
+    student= get_object_or_404(Student, id=id)
+    if request.method == 'POST':
+        form = StudentForm(request.POST, request.FILES, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('academy:student_detail', id=student.id)
+    else:
+        form = StudentForm(instance=student)
+    context = {
+        'form': form,
+        'student': student,
+        'is_edit': True
+    }
+    return render(request, 'academy/student_edit.html', context)  
+
+def student_delete(request, id):
+    student = get_object_or_404(Student, id=id)
+    if request.method == 'POST':
+        if student.student_photo and student.student_photo.url != '/media/default.png':
+            student.student_photo.delete()
+        student.delete()
+        return redirect('academy:students')
+    context = {
+        'student': student
+    }
+    return render(request, 'academy/student_delete.html', context)  

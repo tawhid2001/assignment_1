@@ -71,8 +71,8 @@
             </td>
             <td>
               <a href="{% url 'academy:student_detail' student.id %}" style="color: black"><i class="fa fa-eye"></i></a>
-              <a href="" style="color: black"><i class="fa fa-edit"></i></a>
-              <a href="" style="color: black"><i class="fa fa-trash"></i></a>
+              <a href="{% url 'academy:student_edit' student.id %}" style="color: black"><i class="fa fa-edit"></i></a>
+              <a href="{% url 'academy:student_delete' student.id %}" style="color: black"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
           {% empty %}
